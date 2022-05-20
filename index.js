@@ -9,7 +9,7 @@ config();
 
 app.use(bodyParser.json()); 
 app.use(express.static("build"));
-app.use(cors({ origin: "https://ramos159.github.io/shopify-challenge/"}));
+app.use(cors({ origin: "https://ramos159.github.io/"}));
 
 app.post("/getResponse", (req, res) => {
     const promptString = req.body.prompt;
