@@ -9,12 +9,15 @@ config();
 
 app.use(bodyParser.json()); 
 app.use(express.static("build"));
-app.use(cors({origin:true,credentials: true}));
+app.use(cors({
+    origin:"https://ramos159.github.io",
+    methods:["POST","OPTIONS"],
+    allowedHeaders:["Content-Type"],
+    preflightContinue:true
+}));
 
+app.options('/getResponse', cors());
 app.post("/getResponse", (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
     const promptString = req.body.prompt;
 
