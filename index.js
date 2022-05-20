@@ -9,11 +9,15 @@ config();
 
 app.use(bodyParser.json()); 
 app.use(express.static("build"));
-app.use(cors());
+app.use(cors({
+    origin:"https://ramos159.github.io",
+    methods:["POST","OPTIONS"],
+    allowedHeaders:["Content-Type"],
+    preflightContinue:true
+}));
 
 app.options('/getResponse', cors());
 app.post("/getResponse", (req, res) => {
-    res.header(false);
 
     const promptString = req.body.prompt;
 
