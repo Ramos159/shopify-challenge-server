@@ -9,7 +9,13 @@ config();
 
 app.use(bodyParser.json()); 
 app.use(express.static("build"));
-app.use(cors({preflightContinue:true}));
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions))
 
 app.options("/getResponse", cors());
 app.post("/getResponse", (req, res) => {
