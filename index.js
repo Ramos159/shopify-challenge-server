@@ -14,6 +14,7 @@ app.use(cors({origin:true,credentials: true}));
 app.post("/getResponse", (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
     const promptString = req.body.prompt;
 
