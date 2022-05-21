@@ -1,19 +1,26 @@
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 import express from "express";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
 import cors from "cors";
-var app = express()
-const port = 3000;
+const app = express()
+const port = process.env.PORT || 3000
 config();
-
-app.use(bodyParser.json()); 
+ 
+// parse application/json
+app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("build"));
 app.use(cors());
 
-app.options("/getResponse", cors());
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 app.post("/getResponse", (req, res) => {
-    res.header('Allowed-Headeros')
     const promptString = req.body.prompt;
 
     const data = {
@@ -34,8 +41,7 @@ app.post("/getResponse", (req, res) => {
         body: JSON.stringify(data),
     }).then((response)=>response.json())
     .then((responseData)=>{
-        res.set("Content-Type", "text/html");
-        res.send(JSON.stringify(responseData.choices[0].text));
+        res.status(200).json(responseData);
     });
 });
 
