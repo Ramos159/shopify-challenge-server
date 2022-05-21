@@ -9,16 +9,11 @@ config();
 
 app.use(bodyParser.json()); 
 app.use(express.static("build"));
-
-app.use(cors())
+app.use(cors());
 
 app.options("/getResponse", cors());
 app.post("/getResponse", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*")
-    res.header("Access-Control-Allow-Headers","Content-Type");
-    // res.header("Content-Type","application/json");
-    res.header("Access-Control-Allow-Methods","GET,POST,OPTIONS,DELETE,PUT")
-
+    res.header('Allowed-Headeros')
     const promptString = req.body.prompt;
 
     const data = {
