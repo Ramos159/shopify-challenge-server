@@ -2,7 +2,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
-import cors from "cors";
+// import cors from "cors";
 const app = express()
 const port = process.env.PORT || 3000
 config();
@@ -12,11 +12,12 @@ app.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("build"));
-app.use(cors());
+// app.use(cors());
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST");
     next();
   });
 
