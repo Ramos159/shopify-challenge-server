@@ -36,7 +36,7 @@ app.post("/getResponse", (req, res) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.API_SECRET}`,
+            "Authorization": `Bearer ${process.env.API_SECRET}`,
         },
         body: JSON.stringify(data),
     }).then((response)=>response.json())
